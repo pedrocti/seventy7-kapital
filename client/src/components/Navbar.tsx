@@ -24,7 +24,7 @@ const Navbar = () => {
     { name: 'Testimonials', href: '#testimonials' },
   ];
 
-  const handleNavLinkClick = (href) => {
+  const handleNavLinkClick = (href: string) => {
     if (mobileMenuOpen) {
       setMobileMenuOpen(false);
     }
@@ -41,9 +41,16 @@ const Navbar = () => {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
         >
-          <div className="h-10 w-10 bg-gradient-to-r from-[#7E22CE] to-[#0AEFFF] rounded-full flex items-center justify-center">
-            <span className="font-orbitron text-white text-xl font-bold">77</span>
-          </div>
+          <a href="#" onClick={(e) => {
+            e.preventDefault();
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+          }}>
+            <img 
+              src="/images/logo.jpeg" 
+              alt="Seventy7 Kapital Logo" 
+              className="h-14 w-auto object-contain rounded-full border-2 border-[#7E22CE] hover:border-[#0AEFFF] transition-colors duration-300"
+            />
+          </a>
           <span className="text-white font-grotesk text-xl font-bold">Seventy7 <span className="text-[#0AEFFF]">Kapital</span></span>
         </motion.div>
         

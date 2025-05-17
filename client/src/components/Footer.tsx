@@ -32,10 +32,12 @@ const Footer = () => {
       <div className="container mx-auto px-4">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-12">
           <motion.div variants={itemVariants}>
-            <div className="flex items-center space-x-2 mb-6">
-              <div className="h-10 w-10 bg-gradient-to-r from-[#7E22CE] to-[#0AEFFF] rounded-full flex items-center justify-center">
-                <span className="font-orbitron text-white text-xl font-bold">77</span>
-              </div>
+            <div className="flex items-center space-x-3 mb-6">
+              <img 
+                src="/images/logo.jpeg" 
+                alt="Seventy7 Kapital Logo" 
+                className="h-12 w-auto object-contain rounded-full border-2 border-[#7E22CE]"
+              />
               <span className="text-white font-grotesk text-xl font-bold">Seventy7 <span className="text-[#0AEFFF]">Kapital</span></span>
             </div>
             <p className="text-gray-400 mb-6">
