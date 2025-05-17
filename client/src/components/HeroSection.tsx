@@ -68,17 +68,25 @@ const HeroSection = () => {
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8 }}
           >
-            <div className="relative rounded-3xl overflow-hidden h-auto max-w-full shadow-2xl transform hover:scale-105 transition-transform duration-500 group">
-              <div className="absolute -inset-0.5 bg-gradient-to-r from-[#0AEFFF] to-[#7E22CE] opacity-70 blur-sm rounded-3xl group-hover:opacity-100 transition-opacity duration-300"></div>
-              <div className="relative rounded-3xl overflow-hidden">
+            <div style={{ marginTop: '2rem', display: 'flex', justifyContent: 'center', width: '100%' }}>
+              <div className="relative w-full overflow-hidden group">
+                <div className="absolute -inset-0.5 bg-gradient-to-r from-[#0AEFFF] to-[#7E22CE] opacity-70 blur-sm rounded-2xl group-hover:opacity-100 transition-opacity duration-300"></div>
                 <video 
-                  className="w-full h-auto object-cover"
                   autoPlay 
-                  loop 
                   muted 
-                  playsInline
+                  loop 
+                  playsInline 
+                  style={{ 
+                    width: '100%', 
+                    maxWidth: '1000px', 
+                    height: 'auto', 
+                    borderRadius: '16px', 
+                    boxShadow: '0 0 20px rgba(0, 255, 255, 0.4)', 
+                    border: '1px solid rgba(255, 255, 255, 0.1)',
+                    position: 'relative'
+                  }}
                 >
-                  <source src="https://assets.mixkit.co/videos/preview/mixkit-stock-trading-monitor-close-up-view-10757-large.mp4" type="video/mp4" />
+                  <source src="https://res.cloudinary.com/dyiwnim9t/video/upload/v1715613140/trading-chart-animation_f5gfjd.mp4" type="video/mp4" />
                   Your browser does not support the video tag.
                 </video>
               </div>
