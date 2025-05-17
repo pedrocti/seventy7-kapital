@@ -1,0 +1,289 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 20 14.3% 4.1%;
+    --muted: 60 4.8% 95.9%;
+    --muted-foreground: 25 5.3% 44.7%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 20 14.3% 4.1%;
+    --card: 0 0% 100%;
+    --card-foreground: 20 14.3% 4.1%;
+    --border: 20 5.9% 90%;
+    --input: 20 5.9% 90%;
+    --primary: 207 90% 54%;
+    --primary-foreground: 211 100% 99%;
+    --secondary: 60 4.8% 95.9%;
+    --secondary-foreground: 24 9.8% 10%;
+    --accent: 60 4.8% 95.9%;
+    --accent-foreground: 24 9.8% 10%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 60 9.1% 97.8%;
+    --ring: 20 14.3% 4.1%;
+    --radius: 0.5rem;
+    --chart-1: 240 5.9% 10%;
+    --chart-2: 240 5.9% 20%;
+    --chart-3: 240 5.9% 30%;
+    --chart-4: 240 5.9% 40%;
+    --chart-5: 240 5.9% 50%;
+    
+    /* Custom colors */
+    --primary-dark: 217 33% 11%;
+    --primary-default: 217 33% 18%;
+    --primary-light: 217 33% 27%;
+    --accent-purple: 272 77% 47%;
+    --accent-blue: 217 91% 60%;
+    --accent-teal: 183 100% 50%;
+    --accent-neon: 272 81% 68%;
+    --neutral-dark: 222 47% 5%;
+    --neutral-default: 217 33% 18%;
+    --neutral-light: 214 100% 97%;
+  }
+
+  .dark {
+    --background: 240 10% 3.9%;
+    --foreground: 0 0% 98%;
+    --muted: 240 3.7% 15.9%;
+    --muted-foreground: 240 5% 64.9%;
+    --popover: 240 10% 3.9%;
+    --popover-foreground: 0 0% 98%;
+    --card: 240 10% 3.9%;
+    --card-foreground: 0 0% 98%;
+    --border: 240 3.7% 15.9%;
+    --input: 240 3.7% 15.9%;
+    --primary: 207 90% 54%;
+    --primary-foreground: 211 100% 99%;
+    --secondary: 240 3.7% 15.9%;
+    --secondary-foreground: 0 0% 98%;
+    --accent: 240 3.7% 15.9%;
+    --accent-foreground: 0 0% 98%;
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 0 0% 98%;
+    --ring: 240 4.9% 83.9%;
+    --radius: 0.5rem;
+    --chart-1: 240 5.9% 10%;
+    --chart-2: 240 5.9% 20%;
+    --chart-3: 240 5.9% 30%;
+    --chart-4: 240 5.9% 40%;
+    --chart-5: 240 5.9% 50%;
+  }
+
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply font-sans antialiased bg-[#0F172A] text-white;
+    overflow-x: hidden;
+  }
+}
+
+/* Custom CSS classes */
+@layer components {
+  .font-grotesk {
+    font-family: "Space Grotesk", sans-serif;
+  }
+  
+  .font-inter {
+    font-family: "Inter", sans-serif;
+  }
+  
+  .font-orbitron {
+    font-family: "Orbitron", sans-serif;
+  }
+
+  .neon-border {
+    border: 1px solid transparent;
+    background-origin: border-box;
+    background-clip: padding-box, border-box;
+    background-image: linear-gradient(to right, #1E293B, #1E293B), 
+                      linear-gradient(135deg, rgba(10, 239, 255, 0.8), rgba(126, 34, 206, 0.8));
+    transition: all 0.3s ease;
+  }
+  
+  .neon-border:hover {
+    box-shadow: 0 0 15px rgba(10, 239, 255, 0.6), 0 0 30px rgba(157, 78, 221, 0.4);
+    background-image: linear-gradient(to right, #1E293B, #1E293B), 
+                      linear-gradient(135deg, rgba(126, 34, 206, 0.8), rgba(10, 239, 255, 0.8));
+  }
+  
+  .neon-button {
+    position: relative;
+    overflow: hidden;
+    transition: all 0.3s ease;
+    background: linear-gradient(135deg, #7E22CE, #3B82F6);
+  }
+  
+  .neon-button::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+    transition: all 0.6s ease;
+  }
+  
+  .neon-button:hover::before {
+    left: 100%;
+  }
+  
+  .neon-button:hover {
+    box-shadow: 0 0 15px rgba(59, 130, 246, 0.6), 0 0 30px rgba(126, 34, 206, 0.4);
+    transform: translateY(-2px);
+  }
+  
+  .neon-text {
+    color: white;
+    text-shadow: 0 0 10px rgba(10, 239, 255, 0.7), 0 0 20px rgba(157, 78, 221, 0.5);
+  }
+  
+  .gradient-text {
+    background: linear-gradient(135deg, #0AEFFF, #9D4EDD);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  
+  .bg-grid {
+    background-image: radial-gradient(rgba(255, 255, 255, 0.1) 1px, transparent 1px);
+    background-size: 30px 30px;
+  }
+  
+  .glass-effect {
+    background: rgba(30, 41, 59, 0.5);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+  }
+
+  .animate-pulse-slow {
+    animation: pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  }
+
+  .animate-float {
+    animation: float 6s ease-in-out infinite;
+  }
+
+  .animate-glow {
+    animation: glow 2s ease-in-out infinite alternate;
+  }
+
+  @keyframes pulse {
+    0%, 100% {
+      opacity: 1;
+      transform: scale(1);
+    }
+    50% {
+      opacity: 0.5;
+      transform: scale(0.9);
+    }
+  }
+
+  @keyframes float {
+    0%, 100% { 
+      transform: translateY(0); 
+    }
+    50% { 
+      transform: translateY(-10px); 
+    }
+  }
+
+  @keyframes glow {
+    0% {
+      box-shadow: 0 0 5px rgba(10, 239, 255, 0.5), 0 0 10px rgba(157, 78, 221, 0.3);
+      border-color: rgba(10, 239, 255, 0.5);
+    }
+    100% {
+      box-shadow: 0 0 20px rgba(10, 239, 255, 0.8), 0 0 30px rgba(157, 78, 221, 0.5);
+      border-color: rgba(157, 78, 221, 0.8);
+    }
+  }
+
+  .slide-in-left {
+    animation: slideInLeft 1s ease-out forwards;
+  }
+
+  .slide-in-right {
+    animation: slideInRight 1s ease-out forwards;
+  }
+
+  .fade-in {
+    animation: fadeIn 1s ease-out forwards;
+  }
+
+  .fade-in-left {
+    animation: fadeInLeft 1s ease-out forwards;
+  }
+
+  .fade-in-right {
+    animation: fadeInRight 1s ease-out forwards;
+  }
+
+  @keyframes slideInLeft {
+    from {
+      opacity: 0;
+      transform: translateX(-50px);
+    }
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+
+  @keyframes slideInRight {
+    from {
+      opacity: 0;
+      transform: translateX(50px);
+    }
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(30px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes fadeInLeft {
+    from {
+      opacity: 0;
+      transform: translateX(-50px);
+    }
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+
+  @keyframes fadeInRight {
+    from {
+      opacity: 0;
+      transform: translateX(50px);
+    }
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+
+  .hide-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+  
+  .hide-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+}
