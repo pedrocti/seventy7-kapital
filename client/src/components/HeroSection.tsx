@@ -68,12 +68,20 @@ const HeroSection = () => {
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8 }}
           >
-            <div className="rounded-3xl neon-border h-auto max-w-full shadow-2xl transform hover:scale-105 transition-transform duration-500 overflow-hidden">
-              <img 
-                src="https://images.unsplash.com/photo-1639762681485-074b7f938ba0?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=900&q=80" 
-                alt="Advanced trading dashboard" 
-                className="w-full h-auto object-cover"
-              />
+            <div className="relative rounded-3xl overflow-hidden h-auto max-w-full shadow-2xl transform hover:scale-105 transition-transform duration-500 group">
+              <div className="absolute -inset-0.5 bg-gradient-to-r from-[#0AEFFF] to-[#7E22CE] opacity-70 blur-sm rounded-3xl group-hover:opacity-100 transition-opacity duration-300"></div>
+              <div className="relative rounded-3xl overflow-hidden">
+                <video 
+                  className="w-full h-auto object-cover"
+                  autoPlay 
+                  loop 
+                  muted 
+                  playsInline
+                >
+                  <source src="https://assets.mixkit.co/videos/preview/mixkit-stock-trading-monitor-close-up-view-10757-large.mp4" type="video/mp4" />
+                  Your browser does not support the video tag.
+                </video>
+              </div>
             </div>
           </motion.div>
         </div>
