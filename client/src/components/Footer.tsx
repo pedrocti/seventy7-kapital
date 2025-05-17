@@ -33,13 +33,15 @@ const Footer = () => {
       <div className="container mx-auto px-4">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-12">
           <motion.div variants={itemVariants}>
-            <div className="flex items-center space-x-3 mb-6">
-              <img 
-                src={logoImage} 
-                alt="Seventy7 Kapital Logo" 
-                className="h-12 w-auto object-contain rounded-full border-2 border-[#7E22CE]"
-              />
-              <span className="text-white font-grotesk text-xl font-bold">Seventy7 <span className="text-[#0AEFFF]">Kapital</span></span>
+            <div className="flex items-center mb-6">
+              <div className="relative group">
+                <div className="absolute -inset-0.5 bg-gradient-to-r from-[#0AEFFF] to-[#7E22CE] rounded-full opacity-70 blur-sm group-hover:opacity-100 transition duration-300"></div>
+                <img 
+                  src={logoImage} 
+                  alt="Seventy7 Kapital Logo" 
+                  className="relative h-16 w-auto object-contain rounded-full" 
+                />
+              </div>
             </div>
             <p className="text-gray-400 mb-6">
               Empowering traders with premium resources and mentorship for financial success.

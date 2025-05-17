@@ -55,15 +55,14 @@ const Navbar = () => {
               />
             </div>
           </a>
-          <span className="text-white font-grotesk text-xl font-bold">Seventy7 <span className="text-[#0AEFFF]">Kapital</span></span>
         </motion.div>
         
-        <div className="hidden md:flex items-center space-x-8">
+        <div className="hidden md:flex items-center space-x-5">
           {navLinks.map((link, index) => (
             <motion.a 
               key={index}
               href={link.href}
-              className="text-white hover:text-[#0AEFFF] transition-colors duration-300"
+              className="text-white text-sm uppercase tracking-wider font-medium hover:text-[#0AEFFF] transition-all duration-300 relative group"
               initial={{ opacity: 0, y: -20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.1 * index }}
@@ -73,16 +72,19 @@ const Navbar = () => {
               }}
             >
               {link.name}
+              <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-[#0AEFFF] to-[#7E22CE] group-hover:w-full transition-all duration-300"></span>
             </motion.a>
           ))}
           <motion.a 
             href="https://t.me/Access77bot"
             target="_blank"
             rel="noopener noreferrer"
-            className="neon-button px-5 py-2 rounded-full text-white font-medium flex items-center space-x-2"
+            className="neon-button px-5 py-2 rounded-md text-white font-medium flex items-center space-x-2 shadow-lg shadow-[#7E22CE]/20"
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.4 }}
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.98 }}
           >
             <i className="fab fa-telegram"></i>
             <span>Join Now</span>
@@ -90,49 +92,73 @@ const Navbar = () => {
         </div>
         
         <motion.button 
-          className="md:hidden text-white text-2xl focus:outline-none"
+          className="md:hidden text-white focus:outline-none relative z-20"
           onClick={toggleMobileMenu}
           initial={{ opacity: 0, scale: 0.8 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.3 }}
+          whileHover={{ scale: 1.1 }}
+          whileTap={{ scale: 0.9 }}
         >
-          <i className={`fas ${mobileMenuOpen ? 'fa-times' : 'fa-bars'}`}></i>
+          <div className="relative">
+            <div className={`w-6 h-0.5 bg-gradient-to-r from-[#0AEFFF] to-[#7E22CE] rounded-full transition-all duration-300 ${mobileMenuOpen ? 'rotate-45 translate-y-1.5' : ''}`}></div>
+            <div className={`w-6 h-0.5 bg-white rounded-full my-1.5 transition-all duration-300 ${mobileMenuOpen ? 'opacity-0' : ''}`}></div>
+            <div className={`w-6 h-0.5 bg-gradient-to-r from-[#7E22CE] to-[#0AEFFF] rounded-full transition-all duration-300 ${mobileMenuOpen ? '-rotate-45 -translate-y-1.5' : ''}`}></div>
+          </div>
         </motion.button>
       </nav>
       
       <AnimatePresence>
         {mobileMenuOpen && (
           <motion.div 
-            className="md:hidden glass-effect p-4"
-            initial={{ height: 0, opacity: 0 }}
-            animate={{ height: 'auto', opacity: 1 }}
-            exit={{ height: 0, opacity: 0 }}
-            transition={{ duration: 0.3 }}
+            className="md:hidden fixed inset-0 z-10"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.2 }}
           >
-            <div className="flex flex-col space-y-4">
-              {navLinks.map((link, index) => (
-                <a 
-                  key={index}
-                  href={link.href}
-                  className="text-white hover:text-[#0AEFFF] transition-colors duration-300"
-                  onClick={(e) => {
-                    e.preventDefault();
-                    handleNavLinkClick(link.href);
-                  }}
+            <div className="absolute inset-0 backdrop-blur-lg bg-[#0F172A]/95"></div>
+            
+            <motion.div 
+              className="relative h-full flex flex-col justify-center items-center p-6"
+              initial={{ y: -20, opacity: 0 }}
+              animate={{ y: 0, opacity: 1 }}
+              transition={{ delay: 0.1, duration: 0.3 }}
+            >
+              <div className="flex flex-col space-y-8 items-center">
+                {navLinks.map((link, index) => (
+                  <motion.a 
+                    key={index}
+                    href={link.href}
+                    className="text-white text-xl font-medium hover:text-[#0AEFFF] transition-all duration-300 relative group overflow-hidden"
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: 0.2 + index * 0.1, duration: 0.3 }}
+                    onClick={(e) => {
+                      e.preventDefault();
+                      handleNavLinkClick(link.href);
+                    }}
+                  >
+                    {link.name}
+                    <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-[#0AEFFF] to-[#7E22CE] group-hover:w-full transition-all duration-300"></span>
+                  </motion.a>
+                ))}
+                <motion.a 
+                  href="https://t.me/Access77bot"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="neon-button px-6 py-3 rounded-md text-white font-medium text-center flex items-center space-x-2 mt-4 shadow-lg shadow-[#7E22CE]/20"
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.5, duration: 0.3 }}
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.98 }}
                 >
-                  {link.name}
-                </a>
-              ))}
-              <a 
-                href="https://t.me/Access77bot"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="neon-button px-5 py-2 rounded-full text-white font-medium text-center"
-              >
-                <i className="fab fa-telegram mr-2"></i>
-                Join Now
-              </a>
-            </div>
+                  <i className="fab fa-telegram"></i>
+                  <span>Join Now</span>
+                </motion.a>
+              </div>
+            </motion.div>
           </motion.div>
         )}
       </AnimatePresence>
