@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import logoImage from '../assets/logo.jpeg';
 
 const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -46,7 +47,7 @@ const Navbar = () => {
             window.scrollTo({ top: 0, behavior: 'smooth' });
           }}>
             <img 
-              src="/images/logo.jpeg" 
+              src={logoImage} 
               alt="Seventy7 Kapital Logo" 
               className="h-14 w-auto object-contain rounded-full border-2 border-[#7E22CE] hover:border-[#0AEFFF] transition-colors duration-300"
             />

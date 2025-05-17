@@ -1,4 +1,5 @@
 import { motion } from 'framer-motion';
+import logoImage from '../assets/logo.jpeg';
 
 const Footer = () => {
   const footerVariants = {
@@ -34,7 +35,7 @@ const Footer = () => {
           <motion.div variants={itemVariants}>
             <div className="flex items-center space-x-3 mb-6">
               <img 
-                src="/images/logo.jpeg" 
+                src={logoImage} 
                 alt="Seventy7 Kapital Logo" 
                 className="h-12 w-auto object-contain rounded-full border-2 border-[#7E22CE]"
               />

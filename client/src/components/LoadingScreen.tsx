@@ -1,4 +1,5 @@
 import { motion } from 'framer-motion';
+import logoImage from '../assets/logo.jpeg';
 
 const LoadingScreen = () => {
   return (
@@ -18,7 +19,7 @@ const LoadingScreen = () => {
           }}
         >
           <img 
-            src="/images/logo.jpeg" 
+            src={logoImage} 
             alt="Seventy7 Kapital Logo" 
             className="w-full h-full object-cover"
           />
