@@ -63,7 +63,7 @@ const HeroSection = () => {
           </motion.div>
           
           <motion.div 
-            className="w-full flex justify-center items-center px-4 md:px-8"
+            className="w-full md:w-1/2 flex justify-center items-center"
             initial={{ opacity: 0, x: 50 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8 }}
