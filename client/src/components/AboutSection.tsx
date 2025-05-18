@@ -63,15 +63,17 @@ const AboutSection = () => {
           initial="hidden"
           animate={controls}
         >
-          <h2 className="text-3xl md:text-5xl font-grotesk font-bold mb-6">
+          <h2 className="text-3xl md:text-5xl font-grotesk font-bold mb-8">
             What is <span className="gradient-text">Seventy7 Kapital</span>?
           </h2>
-          <p className="text-xl text-gray-300 max-w-3xl mx-auto mb-6">
-            Seventy7 Kapital isn't just a platform — it's a financial freedom accelerator. We exist to empower everyday people with the tools, mentorship, and funding they need to thrive in global markets.
-          </p>
-          <p className="text-xl text-gray-300 max-w-3xl mx-auto">
-            Through expert guidance, strategic resources, and a network of ambitious traders, we help you transform your trading potential into lasting wealth and a life of true independence.
-          </p>
+          <div className="max-w-3xl mx-auto space-y-6">
+            <p className="text-lg md:text-xl text-gray-300 leading-relaxed">
+              Seventy7 Kapital isn't just a platform, it's a financial freedom accelerator. We exist to empower everyday people with the tools, mentorship, and funding they need to thrive in global markets.
+            </p>
+            <p className="text-lg md:text-xl text-gray-300 leading-relaxed">
+              Through expert guidance, strategic resources, and a network of ambitious traders, we help you turn your trading potential into lasting wealth and a life of true independence.
+            </p>
+          </div>
         </motion.div>
         
         <div className="grid grid-cols-1 md:grid-cols-2 gap-10 items-center">
