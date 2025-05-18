@@ -68,13 +68,20 @@ const HeroSection = () => {
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8 }}
           >
-            <div className="video-container">
+            <div style={{ marginTop: '2rem', display: 'flex', justifyContent: 'center' }}>
               <video 
                 autoPlay 
                 muted 
                 loop 
                 playsInline
-                preload="auto"
+                style={{ 
+                  width: '100%', 
+                  maxWidth: '1000px', 
+                  height: 'auto', 
+                  borderRadius: '16px', 
+                  boxShadow: '0 0 20px rgba(0, 255, 255, 0.4)', 
+                  border: '1px solid rgba(255, 255, 255, 0.1)'
+                }}
               >
                 <source src="https://res.cloudinary.com/dyiwnim9t/video/upload/v1715613140/trading-chart-animation_f5gfjd.mp4" type="video/mp4" />
                 Your browser does not support the video tag.
