@@ -39,7 +39,7 @@ const Footer = () => {
                 <img 
                   src={logoImage} 
                   alt="Seventy7 Kapital Logo" 
-                  className="relative h-16 w-auto object-contain rounded-full" 
+                  className="relative h-10 w-auto object-contain rounded-full" 
                 />
               </div>
             </div>
