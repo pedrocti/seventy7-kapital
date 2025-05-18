@@ -22,7 +22,7 @@ const Navbar = () => {
   const navLinks = [
     { name: 'About', href: '#about' },
     { name: 'Services', href: '#services' },
-    { name: 'Testimonials', href: '#testimonials' },
+    { name: 'Blog', href: '#blog' },
   ];
 
   const handleNavLinkClick = (href: string) => {
