@@ -56,23 +56,25 @@ const AboutSection = () => {
         <div className="absolute bottom-1/4 left-1/3 w-64 h-64 bg-[#3B82F6] opacity-20 blur-[100px] rounded-full"></div>
       </div>
       
-      <div className="container mx-auto px-4 z-10 relative" ref={ref}>
+      <div className="container mx-auto px-4 sm:px-6 md:px-8 z-10 relative" ref={ref}>
         <motion.div 
-          className="text-center mb-16"
+          className="max-w-4xl mx-auto text-center mb-16"
           variants={itemVariants}
           initial="hidden"
           animate={controls}
         >
-          <h2 className="text-3xl md:text-5xl font-grotesk font-bold mb-8">
-            What is <span className="gradient-text">Seventy7 Kapital</span>?
+          <h2 className="text-[1.8rem] md:text-[2.5rem] font-grotesk font-bold mb-8 relative inline-block">
+            What is <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-500">Seventy7 Kapital</span>?
+            <div className="absolute bottom-0 left-0 w-full h-1 bg-gradient-to-r from-blue-400 to-purple-500 opacity-60"></div>
           </h2>
-          <div className="max-w-3xl mx-auto space-y-6">
-            <p className="text-lg md:text-xl text-gray-300 leading-relaxed">
-              Seventy7 Kapital isn't just a platform, it's a financial freedom accelerator. We exist to empower everyday people with the tools, mentorship, and funding they need to thrive in global markets.
-            </p>
-            <p className="text-lg md:text-xl text-gray-300 leading-relaxed">
-              Through expert guidance, strategic resources, and a network of ambitious traders, we help you turn your trading potential into lasting wealth and a life of true independence.
-            </p>
+          
+          <div className="space-y-8">
+            <motion.p 
+              className="text-[1rem] md:text-[1.2rem] text-[#E0F7FA] leading-relaxed font-light"
+              variants={itemVariants}
+            >
+              Seventy7 Kapital is a financial freedom accelerator. We exist to empower everyday people with the tools, mentorship, and funding assistance they need to thrive in global markets. Through expert guidance, strategic resources, and a network of ambitious traders, we help you turn your trading potential into lasting wealth and a life of true independence.
+            </motion.p>
           </div>
         </motion.div>
         
@@ -82,12 +84,15 @@ const AboutSection = () => {
             initial="hidden"
             animate={controls}
           >
-            <div className="rounded-3xl neon-border shadow-2xl w-full h-auto overflow-hidden">
-              <img 
-                src="https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=600&q=80" 
-                alt="Professional trader analyzing market data" 
-                className="w-full h-auto object-cover"
-              />
+            <div className="rounded-3xl overflow-hidden relative group">
+              <div className="absolute -inset-0.5 bg-gradient-to-r from-blue-400 to-purple-500 opacity-70 blur-sm rounded-3xl group-hover:opacity-100 transition-opacity duration-300"></div>
+              <div className="relative">
+                <img 
+                  src="https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=600&q=80" 
+                  alt="Professional trader analyzing market data" 
+                  className="w-full h-auto object-cover rounded-3xl shadow-2xl"
+                />
+              </div>
             </div>
           </motion.div>
           
@@ -99,40 +104,43 @@ const AboutSection = () => {
           >
             <motion.div 
               variants={itemVariants}
-              className="neon-border p-6 rounded-2xl flex items-start space-x-4 hover:scale-105 transition-transform duration-300"
+              className="p-6 rounded-2xl flex items-start space-x-4 hover:scale-105 transition-transform duration-300 bg-opacity-10 bg-white backdrop-blur-sm"
+              style={{ boxShadow: '0 0 20px rgba(0, 255, 255, 0.1)' }}
             >
-              <div className="bg-gradient-to-r from-[#7E22CE] to-[#3B82F6] p-3 rounded-xl">
+              <div className="bg-gradient-to-r from-blue-400 to-purple-500 p-3 rounded-xl">
                 <i className="fas fa-rocket text-white text-2xl"></i>
               </div>
               <div>
-                <h3 className="text-xl font-grotesk font-bold mb-2">Modern Trading Approach</h3>
-                <p className="text-gray-300">Combining technical analysis with cutting-edge technology for optimal results.</p>
+                <h3 className="text-xl font-grotesk font-bold mb-2 text-[#E0F7FA]">Modern Trading Approach</h3>
+                <p className="text-[#E0F7FA] opacity-80">Combining technical analysis with cutting-edge technology for optimal results.</p>
               </div>
             </motion.div>
             
             <motion.div 
               variants={itemVariants}
-              className="neon-border p-6 rounded-2xl flex items-start space-x-4 hover:scale-105 transition-transform duration-300"
+              className="p-6 rounded-2xl flex items-start space-x-4 hover:scale-105 transition-transform duration-300 bg-opacity-10 bg-white backdrop-blur-sm"
+              style={{ boxShadow: '0 0 20px rgba(0, 255, 255, 0.1)' }}
             >
-              <div className="bg-gradient-to-r from-[#3B82F6] to-[#0AEFFF] p-3 rounded-xl">
+              <div className="bg-gradient-to-r from-blue-400 to-purple-500 p-3 rounded-xl">
                 <i className="fas fa-users text-white text-2xl"></i>
               </div>
               <div>
-                <h3 className="text-xl font-grotesk font-bold mb-2">Community-Driven</h3>
-                <p className="text-gray-300">A network of like-minded traders sharing insights and growing together.</p>
+                <h3 className="text-xl font-grotesk font-bold mb-2 text-[#E0F7FA]">Community-Driven</h3>
+                <p className="text-[#E0F7FA] opacity-80">A network of like-minded traders sharing insights and growing together.</p>
               </div>
             </motion.div>
             
             <motion.div 
               variants={itemVariants}
-              className="neon-border p-6 rounded-2xl flex items-start space-x-4 hover:scale-105 transition-transform duration-300"
+              className="p-6 rounded-2xl flex items-start space-x-4 hover:scale-105 transition-transform duration-300 bg-opacity-10 bg-white backdrop-blur-sm"
+              style={{ boxShadow: '0 0 20px rgba(0, 255, 255, 0.1)' }}
             >
-              <div className="bg-gradient-to-r from-[#0AEFFF] to-[#9D4EDD] p-3 rounded-xl">
+              <div className="bg-gradient-to-r from-blue-400 to-purple-500 p-3 rounded-xl">
                 <i className="fas fa-graduation-cap text-white text-2xl"></i>
               </div>
               <div>
-                <h3 className="text-xl font-grotesk font-bold mb-2">Education First</h3>
-                <p className="text-gray-300">Our focus is on building financial literacy and trading competence.</p>
+                <h3 className="text-xl font-grotesk font-bold mb-2 text-[#E0F7FA]">Education First</h3>
+                <p className="text-[#E0F7FA] opacity-80">Our focus is on building financial literacy and trading competence.</p>
               </div>
             </motion.div>
           </motion.div>
