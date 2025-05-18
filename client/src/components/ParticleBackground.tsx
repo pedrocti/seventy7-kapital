@@ -2,10 +2,11 @@ import { useEffect, useRef } from 'react';
 import * as THREE from 'three';
 
 const ParticleBackground = () => {
-  const containerRef = useRef(null);
+  const containerRef = useRef<HTMLDivElement>(null);
   
   useEffect(() => {
-    if (!containerRef.current) return;
+    const container = containerRef.current;
+    if (!container) return;
     
     // Scene setup
     const scene = new THREE.Scene();
@@ -28,11 +29,11 @@ const ParticleBackground = () => {
     renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
     
     // Clear existing canvas if any
-    while (containerRef.current.firstChild) {
-      containerRef.current.removeChild(containerRef.current.firstChild);
+    while (container.firstChild) {
+      container.removeChild(container.firstChild);
     }
     
-    containerRef.current.appendChild(renderer.domElement);
+    container.appendChild(renderer.domElement);
     
     // Create particles
     const particlesGeometry = new THREE.BufferGeometry();
@@ -62,7 +63,7 @@ const ParticleBackground = () => {
     let mouseX = 0;
     let mouseY = 0;
     
-    function onMouseMove(event) {
+    function onMouseMove(event: MouseEvent) {
       mouseX = (event.clientX / window.innerWidth) * 2 - 1;
       mouseY = -(event.clientY / window.innerHeight) * 2 + 1;
     }
@@ -84,12 +85,15 @@ const ParticleBackground = () => {
     const animate = () => {
       const elapsedTime = clock.getElapsedTime();
       
-      // Rotate particles slowly
-      particlesMesh.rotation.x += 0.0003;
-      particlesMesh.rotation.y += 0.0003;
+      // Rotate particles continually regardless of mouse movement
+      particlesMesh.rotation.x = elapsedTime * 0.05;
+      particlesMesh.rotation.y = elapsedTime * 0.03;
       
-      // Follow mouse with subtle movement
-      if (mouseX && mouseY) {
+      // Add slight wave motion
+      particlesMesh.position.y = Math.sin(elapsedTime * 0.2) * 0.1;
+      
+      // Follow mouse with subtle movement if available
+      if (mouseX !== 0 || mouseY !== 0) {
         particlesMesh.rotation.x += mouseY * 0.0003;
         particlesMesh.rotation.y += mouseX * 0.0003;
       }
@@ -98,7 +102,7 @@ const ParticleBackground = () => {
       renderer.render(scene, camera);
       
       // Call animate again on the next frame
-      requestAnimationFrame(animate);
+      window.requestAnimationFrame(animate);
     };
     
     animate();
@@ -107,7 +111,9 @@ const ParticleBackground = () => {
     return () => {
       window.removeEventListener('mousemove', onMouseMove);
       window.removeEventListener('resize', handleResize);
-      containerRef.current?.removeChild(renderer.domElement);
+      if (container && renderer.domElement) {
+        container.removeChild(renderer.domElement);
+      }
     };
   }, []);
   

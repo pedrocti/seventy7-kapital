@@ -325,7 +325,6 @@
     width: 100%;
     max-width: 1200px;
     margin: 0 auto;
-    padding: 0 16px;
     position: relative;
     padding-bottom: 56.25%; /* 16:9 aspect ratio */
     height: 0;
@@ -367,9 +366,21 @@
     box-shadow: 0 0 60px rgba(0, 255, 255, 0.3);
   }
   
+  /* Mobile specific adjustments */
   @media (max-width: 768px) {
     .youtube-container {
-      padding: 0 8px;
+      margin-top: 2rem;
+      margin-bottom: 2rem;
+      width: 100%;
+      border-radius: 12px;
+    }
+    
+    .youtube-container::before {
+      border-radius: 14px;
+    }
+    
+    .youtube-video {
+      border-radius: 12px;
     }
   }
 }

@@ -25,7 +25,7 @@ const HeroSection = () => {
       </div>
       
       <div className="container mx-auto px-4 py-20 z-10 relative">
-        <div className="flex flex-col md:flex-row items-center justify-between">
+        <div className="flex flex-col md:flex-row items-center justify-between mb-10">
           <motion.div 
             className="md:w-1/2 mb-10 md:mb-0 md:pr-10"
             initial={{ opacity: 0, x: -50 }}
@@ -68,7 +68,7 @@ const HeroSection = () => {
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8 }}
           >
-            <div className="youtube-container">
+            <div className="w-full youtube-container">
               <iframe
                 className="youtube-video"
                 src="https://www.youtube.com/embed/KQcbjphd7sw?autoplay=1&mute=1&loop=1&playlist=KQcbjphd7sw&controls=0&showinfo=0&rel=0"
