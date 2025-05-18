@@ -20,9 +20,9 @@ const HeroSection = () => {
 
   const keyPoints = [
     'Lifetime access to expert mentorship',
-    'Funded trading account assistance',
-    'Real-time trade signals & market insights',
-    'Premium strategies that actually work',
+    'Prop-firm Evaluation assistance',
+    'Signals & market insights',
+    'Free Trading Materials & resources',
     'Global business & travel experiences'
   ];
 
@@ -33,26 +33,26 @@ const HeroSection = () => {
         <div className="absolute bottom-0 right-0 w-80 h-80 bg-[#0AEFFF] opacity-20 blur-[100px] rounded-full transform translate-x-1/2 translate-y-1/2"></div>
       </div>
       
-      <div className="container mx-auto px-4 py-20 z-10 relative">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-8 py-16 md:py-20 z-10 relative">
         <motion.div 
-          className="max-w-4xl mx-auto text-center mb-10"
+          className="mx-auto text-center"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
         >
-          <h1 className="text-5xl md:text-7xl font-bold mb-6 leading-tight">
+          <h1 className="text-4xl md:text-6xl font-extrabold mb-6 leading-tight">
             <span className="block mb-2">Escape the 9–5.</span>
-            <span className="bg-clip-text text-transparent bg-gradient-to-r from-[#0AEFFF] to-[#7E22CE]">
+            <span className="bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-purple-500">
               Earn While You Sleep.
             </span>
           </h1>
           
-          <p className="text-xl md:text-2xl text-gray-300 mb-12 max-w-3xl mx-auto">
+          <p className="text-base md:text-lg text-gray-300 mb-10 max-w-md mx-auto font-light">
             Join the elite circle of traders unlocking financial freedom through mentorship, capital, and consistent market profits.
           </p>
           
           <motion.div 
-            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12 max-w-3xl mx-auto text-left"
+            className="flex flex-col items-center space-y-3 mb-10 max-w-lg mx-auto"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.3, staggerChildren: 0.1 }}
@@ -60,23 +60,23 @@ const HeroSection = () => {
             {keyPoints.map((point, index) => (
               <motion.div 
                 key={index}
-                className="flex items-start space-x-3"
+                className="flex items-start space-x-3 w-full"
                 initial={{ opacity: 0, x: -10 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ delay: 0.1 * index }}
               >
-                <IoCheckmarkCircle className="text-green-400 text-2xl flex-shrink-0 mt-1" />
-                <span className="text-white text-lg">{point}</span>
+                <IoCheckmarkCircle className="text-green-400 text-xl flex-shrink-0 mt-0.5" />
+                <span className="text-sm md:text-base text-white text-left">{point}</span>
               </motion.div>
             ))}
           </motion.div>
           
-          <div className="flex flex-col sm:flex-row justify-center gap-6">
+          <div className="flex flex-col sm:flex-row justify-center gap-4 md:gap-6">
             <motion.a
               href="https://t.me/Access77bot"
               target="_blank"
               rel="noopener noreferrer"
-              className="px-8 py-4 bg-gradient-to-r from-[#0AEFFF] to-[#7E22CE] text-white font-bold rounded-full text-lg transform transition-all duration-300 hover:scale-105 hover:shadow-glow flex items-center justify-center"
+              className="px-6 py-3 bg-gradient-to-r from-blue-400 to-purple-500 text-white font-bold rounded-full text-base md:text-lg transition-all duration-300 hover:shadow-[0_0_15px_rgba(59,130,246,0.5)] flex items-center justify-center"
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.98 }}
             >
@@ -85,7 +85,7 @@ const HeroSection = () => {
             
             <motion.a
               href="#about"
-              className="px-8 py-4 bg-transparent border-2 border-[#0AEFFF] text-[#0AEFFF] font-bold rounded-full text-lg transform transition-all duration-300 hover:bg-[#0AEFFF10] flex items-center justify-center"
+              className="px-6 py-3 bg-transparent border border-blue-400 text-blue-400 font-medium rounded-full text-base md:text-lg transition-all duration-300 hover:bg-blue-400/10 flex items-center justify-center"
               onClick={(e) => {
                 e.preventDefault();
                 document.getElementById('about')?.scrollIntoView({ behavior: 'smooth' });
