@@ -66,8 +66,11 @@ const AboutSection = () => {
           <h2 className="text-3xl md:text-5xl font-grotesk font-bold mb-6">
             What is <span className="gradient-text">Seventy7 Kapital</span>?
           </h2>
+          <p className="text-xl text-gray-300 max-w-3xl mx-auto mb-6">
+            Seventy7 Kapital isn't just a platform — it's a financial freedom accelerator. We exist to empower everyday people with the tools, mentorship, and funding they need to thrive in global markets.
+          </p>
           <p className="text-xl text-gray-300 max-w-3xl mx-auto">
-            We are more than a trading platform. Seventy7 Kapital is a movement — giving traders access to free resources, professional mentorship, exclusive funding support, and a community of growth-minded achievers.
+            Through expert guidance, strategic resources, and a network of ambitious traders, we help you transform your trading potential into lasting wealth and a life of true independence.
           </p>
         </motion.div>
         
