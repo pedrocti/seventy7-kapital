@@ -68,21 +68,14 @@ const HeroSection = () => {
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8 }}
           >
-            <div className="video-container">
-              <video 
-                autoPlay 
-                muted 
-                loop 
-                playsInline 
-                preload="auto"
-                className="w-full rounded-xl"
-              >
-                <source 
-                  src="https://res.cloudinary.com/dyiwnim9t/video/upload/v1715613140/trading-chart-animation_f5gfjd.mp4" 
-                  type="video/mp4" 
-                />
-                Your browser does not support the video tag.
-              </video>
+            <div className="youtube-container">
+              <iframe
+                className="youtube-video"
+                src="https://www.youtube.com/embed/KQcbjphd7sw?autoplay=1&mute=1&loop=1&playlist=KQcbjphd7sw&controls=0&showinfo=0&rel=0"
+                title="Trading Chart Animation"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowFullScreen
+              ></iframe>
             </div>
           </motion.div>
         </div>
