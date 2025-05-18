@@ -20,10 +20,10 @@ const HeroSection = () => {
 
   const keyPoints = [
     'Lifetime access to expert mentorship',
-    'Prop-firm Evaluation assistance',
-    'Signals & market insights',
-    'Free Trading Materials & resources',
-    'Global business & travel experiences'
+    'Prop firm evaluation assistance',
+    'Signals and market insights',
+    'Free trading materials and resources',
+    'Global business and travel experiences'
   ];
 
   return (
