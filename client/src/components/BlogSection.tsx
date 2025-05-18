@@ -21,7 +21,7 @@ const BlogPostCard = ({
   return (
     <motion.div 
       variants={animation}
-      className="backdrop-blur-md bg-opacity-20 bg-slate-900 rounded-xl overflow-hidden transition-all duration-300 hover:scale-102 group"
+      className="backdrop-blur-md bg-opacity-20 bg-slate-900 rounded-xl overflow-hidden transition-all duration-300 hover:scale-105 group"
       style={{ 
         boxShadow: '0 0 15px rgba(59, 130, 246, 0.2)',
         border: '1px solid rgba(59, 130, 246, 0.1)'
