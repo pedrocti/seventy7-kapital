@@ -58,7 +58,7 @@ const AboutSection = () => {
       
       <div className="container mx-auto px-4 sm:px-6 md:px-8 z-10 relative" ref={ref}>
         <motion.div 
-          className="max-w-4xl mx-auto text-center mb-16"
+          className="max-w-2xl mx-auto mb-16"
           variants={itemVariants}
           initial="hidden"
           animate={controls}
@@ -68,12 +68,18 @@ const AboutSection = () => {
             <div className="absolute bottom-0 left-0 w-full h-1 bg-gradient-to-r from-blue-400 to-purple-500 opacity-60"></div>
           </h2>
           
-          <div className="space-y-8">
+          <div className="space-y-6 px-6 sm:px-0">
             <motion.p 
-              className="text-[1rem] md:text-[1.2rem] text-[#E0F7FA] leading-relaxed font-light"
+              className="text-base sm:text-lg text-[#E0F7FA] leading-relaxed tracking-normal text-left max-w-[600px] md:max-w-2xl"
               variants={itemVariants}
             >
-              Seventy7 Kapital is a financial freedom accelerator. We exist to empower everyday people with the tools, mentorship, and funding assistance they need to thrive in global markets. Through expert guidance, strategic resources, and a network of ambitious traders, we help you turn your trading potential into lasting wealth and a life of true independence.
+              Seventy7 Kapital is a financial freedom accelerator. We exist to empower everyday people with the tools, mentorship, and funding assistance they need to thrive in global markets.
+            </motion.p>
+            <motion.p 
+              className="text-base sm:text-lg text-[#E0F7FA] leading-relaxed tracking-normal text-left max-w-[600px] md:max-w-2xl"
+              variants={itemVariants}
+            >
+              Through expert guidance, strategic resources, and a network of ambitious traders, we help you turn your trading potential into lasting wealth and a life of true independence.
             </motion.p>
           </div>
         </motion.div>
