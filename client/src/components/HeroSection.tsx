@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
+import { IoCheckmarkCircle } from 'react-icons/io5';
 
 const HeroSection = () => {
   const [scrollIndicator, setScrollIndicator] = useState(true);
@@ -17,6 +18,14 @@ const HeroSection = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  const keyPoints = [
+    'Lifetime access to expert mentorship',
+    'Funded trading account assistance',
+    'Real-time trade signals & market insights',
+    'Premium strategies that actually work',
+    'Global business & travel experiences'
+  ];
+
   return (
     <section className="min-h-screen flex items-center justify-center bg-grid relative overflow-hidden" id="hero">
       <div className="absolute inset-0 z-0">
@@ -25,60 +34,69 @@ const HeroSection = () => {
       </div>
       
       <div className="container mx-auto px-4 py-20 z-10 relative">
-        <div className="flex flex-col md:flex-row items-center justify-between mb-10">
-          <motion.div 
-            className="md:w-1/2 mb-10 md:mb-0 md:pr-10"
-            initial={{ opacity: 0, x: -50 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.8 }}
-          >
-            <h1 className="text-4xl md:text-6xl font-grotesk font-bold mb-6">
-              <span className="block mb-2">Unlock Your</span>
-              <span className="neon-text gradient-text">Financial Power</span>
-            </h1>
-            <p className="text-xl text-gray-300 mb-8 max-w-lg">
-              Access premium trading mentorship, funding support, and life-changing financial resources.
-            </p>
-            <div className="space-y-4 md:space-y-0 md:space-x-4 md:flex">
-              <a
-                href="https://t.me/Access77bot"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="neon-button px-8 py-4 rounded-full text-white font-medium text-lg inline-flex items-center animate-pulse-slow"
-              >
-                <i className="fab fa-telegram mr-3"></i>
-                Launch 77AccessBot
-              </a>
-              <a
-                href="#about"
-                className="neon-border px-8 py-4 rounded-full text-white font-medium text-lg inline-block text-center"
-                onClick={(e) => {
-                  e.preventDefault();
-                  document.getElementById('about')?.scrollIntoView({ behavior: 'smooth' });
-                }}
-              >
-                Learn More
-              </a>
-            </div>
-          </motion.div>
+        <motion.div 
+          className="max-w-4xl mx-auto text-center mb-10"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8 }}
+        >
+          <h1 className="text-5xl md:text-7xl font-bold mb-6 leading-tight">
+            <span className="block mb-2">Escape the 9–5.</span>
+            <span className="bg-clip-text text-transparent bg-gradient-to-r from-[#0AEFFF] to-[#7E22CE]">
+              Earn While You Sleep.
+            </span>
+          </h1>
+          
+          <p className="text-xl md:text-2xl text-gray-300 mb-12 max-w-3xl mx-auto">
+            Join the elite circle of traders unlocking financial freedom through mentorship, capital, and consistent market profits.
+          </p>
           
           <motion.div 
-            className="w-full md:w-1/2 flex justify-center items-center"
-            initial={{ opacity: 0, x: 50 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.8 }}
+            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12 max-w-3xl mx-auto text-left"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 0.3, staggerChildren: 0.1 }}
           >
-            <div className="w-full youtube-container">
-              <iframe
-                className="youtube-video"
-                src="https://www.youtube.com/embed/KQcbjphd7sw?autoplay=1&mute=1&loop=1&playlist=KQcbjphd7sw&controls=0&showinfo=0&rel=0"
-                title="Trading Chart Animation"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                allowFullScreen
-              ></iframe>
-            </div>
+            {keyPoints.map((point, index) => (
+              <motion.div 
+                key={index}
+                className="flex items-start space-x-3"
+                initial={{ opacity: 0, x: -10 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ delay: 0.1 * index }}
+              >
+                <IoCheckmarkCircle className="text-green-400 text-2xl flex-shrink-0 mt-1" />
+                <span className="text-white text-lg">{point}</span>
+              </motion.div>
+            ))}
           </motion.div>
-        </div>
+          
+          <div className="flex flex-col sm:flex-row justify-center gap-6">
+            <motion.a
+              href="https://t.me/Access77bot"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="px-8 py-4 bg-gradient-to-r from-[#0AEFFF] to-[#7E22CE] text-white font-bold rounded-full text-lg transform transition-all duration-300 hover:scale-105 hover:shadow-glow flex items-center justify-center"
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.98 }}
+            >
+              Launch 77AccessBot
+            </motion.a>
+            
+            <motion.a
+              href="#about"
+              className="px-8 py-4 bg-transparent border-2 border-[#0AEFFF] text-[#0AEFFF] font-bold rounded-full text-lg transform transition-all duration-300 hover:bg-[#0AEFFF10] flex items-center justify-center"
+              onClick={(e) => {
+                e.preventDefault();
+                document.getElementById('about')?.scrollIntoView({ behavior: 'smooth' });
+              }}
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.98 }}
+            >
+              Learn More
+            </motion.a>
+          </div>
+        </motion.div>
         
         {scrollIndicator && (
           <motion.div 
