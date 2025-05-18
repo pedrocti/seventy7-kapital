@@ -2,6 +2,18 @@ import { useEffect } from 'react';
 import { motion, useAnimation } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
 
+interface ServiceCardProps {
+  icon: string;
+  gradientFrom: string;
+  gradientTo: string;
+  title: string;
+  description: string;
+  features: string[];
+  ctaText: string;
+  delay?: number;
+  telegramLinks?: string[];
+}
+
 const ServiceCard = ({ 
   icon, 
   gradientFrom, 
@@ -10,8 +22,9 @@ const ServiceCard = ({
   description, 
   features,
   ctaText,
-  delay = 0
-}) => {
+  delay = 0,
+  telegramLinks
+}: ServiceCardProps) => {
   const controls = useAnimation();
   const [ref, inView] = useInView({ threshold: 0.2, triggerOnce: true });
 
@@ -24,6 +37,14 @@ const ServiceCard = ({
       });
     }
   }, [controls, inView, delay]);
+
+  const handleClick = (e: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => {
+    if (telegramLinks && telegramLinks.length > 0) {
+      e.preventDefault();
+      const randomIndex = Math.floor(Math.random() * telegramLinks.length);
+      window.open(telegramLinks[randomIndex], '_blank', 'noopener,noreferrer');
+    }
+  };
 
   return (
     <motion.div 
@@ -39,7 +60,7 @@ const ServiceCard = ({
         <h3 className="text-2xl font-grotesk font-bold mb-4">{title}</h3>
         <p className="text-gray-300 mb-6 flex-grow">{description}</p>
         <ul className="text-gray-300 space-y-3 mb-8">
-          {features.map((feature, index) => (
+          {features.map((feature: string, index: number) => (
             <li key={index} className="flex items-center">
               <i className="fas fa-check text-[#0AEFFF] mr-3"></i>
               <span>{feature}</span>
@@ -47,7 +68,8 @@ const ServiceCard = ({
           ))}
         </ul>
         <a
-          href="https://t.me/Access77bot"
+          href={telegramLinks ? telegramLinks[0] : "https://t.me/Access77bot"}
+          onClick={telegramLinks ? handleClick : undefined}
           target="_blank"
           rel="noopener noreferrer"
           className="text-[#0AEFFF] font-medium inline-flex items-center group-hover:underline"
@@ -117,10 +139,14 @@ const ServicesSection = () => {
       features: [
         "Challenge preparation",
         "Strategy optimization",
-        "Ongoing account management"
+        "Account evaluation stage assistance"
       ],
       ctaText: "Get Funded",
-      delay: 0.6
+      delay: 0.6,
+      telegramLinks: [
+        "https://t.me/Seventy7_Kapital",
+        "https://t.me/Seventy7kapitaladmin1"
+      ]
     }
   ];
 
