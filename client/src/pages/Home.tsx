@@ -8,6 +8,8 @@ import CTASection from '@/components/CTASection';
 import Footer from '@/components/Footer';
 import StickyCTA from '@/components/StickyCTA';
 import ParticleBackground from '@/components/ParticleBackground';
+import TradingVisuals from '@/components/TradingVisuals';
+import MarketImpactVisual from '@/components/MarketImpactVisual';
 import { Helmet } from 'react-helmet';
 
 const Home = () => {
@@ -38,6 +40,8 @@ const Home = () => {
         <HeroSection />
         <AboutSection />
         <ServicesSection />
+        <TradingVisuals />
+        <MarketImpactVisual />
         <BlogSection />
         <CTASection />
       </main>
