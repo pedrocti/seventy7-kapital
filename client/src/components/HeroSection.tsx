@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { IoCheckmarkCircle } from 'react-icons/io5';
+import CandlestickBackground from './CandlestickBackground';
 
 const HeroSection = () => {
   const [scrollIndicator, setScrollIndicator] = useState(true);
@@ -32,6 +33,9 @@ const HeroSection = () => {
         <div className="absolute top-0 left-0 w-80 h-80 bg-[#7E22CE] opacity-20 blur-[100px] rounded-full transform -translate-x-1/2 -translate-y-1/2"></div>
         <div className="absolute bottom-0 right-0 w-80 h-80 bg-[#0AEFFF] opacity-20 blur-[100px] rounded-full transform translate-x-1/2 translate-y-1/2"></div>
       </div>
+      
+      {/* Transparent green candlestick chart overlay */}
+      <CandlestickBackground className="z-1" />
       
       <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-8 py-16 md:py-20 z-10 relative">
         <motion.div 
