@@ -77,8 +77,8 @@ const CandlestickBackground = ({ className = '' }: CandlestickProps) => {
       // Clear canvas
       ctx.clearRect(0, 0, canvas.width, canvas.height);
       
-      // Set transparency - increased for better visibility
-      ctx.globalAlpha = 0.2;
+      // Set transparency - reduced to avoid text disruption
+      ctx.globalAlpha = 0.12;
       
       const candleWidth = canvas.width / 12; // Increased candle width for better visibility
       const spacing = candleWidth * 0.25; 
@@ -113,8 +113,8 @@ const CandlestickBackground = ({ className = '' }: CandlestickProps) => {
         ctx.beginPath();
         ctx.moveTo(x + candleWidth / 2, scaleY(candle.high));
         ctx.lineTo(x + candleWidth / 2, scaleY(candle.low));
-        ctx.strokeStyle = candle.isUp ? 'rgba(0, 255, 0, 0.8)' : 'rgba(255, 0, 0, 0.7)';
-        ctx.lineWidth = 3; // Increased line width
+        ctx.strokeStyle = candle.isUp ? 'rgba(0, 255, 0, 0.4)' : 'rgba(255, 0, 0, 0.3)';
+        ctx.lineWidth = 2; // Reduced line width
         ctx.stroke();
         
         // Draw body
@@ -123,16 +123,16 @@ const CandlestickBackground = ({ className = '' }: CandlestickProps) => {
         const bodyHeight = Math.abs(closeY - openY);
         const bodyY = Math.min(openY, closeY);
         
-        // Make green candlesticks more visible with better opacity and glow effect
+        // Reduced visibility of candlesticks to avoid text disruption
         if (candle.isUp) {
-          // Add subtle glow effect to bullish candles
-          ctx.shadowColor = 'rgba(0, 255, 0, 0.5)';
-          ctx.shadowBlur = 10;
-          ctx.fillStyle = 'rgba(0, 255, 0, 0.7)';
+          // Removed glow effect and reduced opacity
+          ctx.shadowColor = 'transparent';
+          ctx.shadowBlur = 0;
+          ctx.fillStyle = 'rgba(0, 255, 0, 0.4)';
         } else {
-          ctx.shadowColor = 'rgba(255, 0, 0, 0.4)';
-          ctx.shadowBlur = 5;
-          ctx.fillStyle = 'rgba(255, 0, 0, 0.6)';
+          ctx.shadowColor = 'transparent';
+          ctx.shadowBlur = 0;
+          ctx.fillStyle = 'rgba(255, 0, 0, 0.3)';
         }
         
         ctx.fillRect(x, bodyY, candleWidth, bodyHeight);
