@@ -1,5 +1,6 @@
 import { motion } from 'framer-motion';
 import logoImage from '../assets/logo.jpeg';
+import { Link } from 'wouter';
 
 const Footer = () => {
   const footerVariants = {
@@ -108,9 +109,9 @@ const Footer = () => {
         >
           <p className="text-gray-500 mb-4 md:mb-0">&copy; {new Date().getFullYear()} Seventy7 Kapital. All rights reserved.</p>
           <div className="flex space-x-6 text-gray-500">
-            <a href="#" className="hover:text-[#0AEFFF] transition-colors duration-300">Privacy Policy</a>
-            <a href="#" className="hover:text-[#0AEFFF] transition-colors duration-300">Terms of Service</a>
-            <a href="#" className="hover:text-[#0AEFFF] transition-colors duration-300">Disclaimer</a>
+            <a href="/privacy-policy" className="hover:text-[#0AEFFF] transition-colors duration-300">Privacy Policy</a>
+            <a href="/terms-of-service" className="hover:text-[#0AEFFF] transition-colors duration-300">Terms of Service</a>
+            <a href="/disclaimer" className="hover:text-[#0AEFFF] transition-colors duration-300">Disclaimer</a>
           </div>
         </motion.div>
       </div>
