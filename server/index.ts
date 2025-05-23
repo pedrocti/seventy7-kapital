@@ -1,39 +1,20 @@
-import { exec } from 'child_process';
-import path from 'path';
+import { spawn } from 'child_process';
 
-console.log('🚀 Starting Seventy7 Kapital Trading Platform...');
+console.log('🚀 Seventy7 Kapital - Pure Static Frontend');
 
-const clientPath = path.join(process.cwd(), 'client');
-
-// Use Vite CLI directly for proper module handling
-const viteCommand = `cd ${clientPath} && npx vite --host 0.0.0.0 --port 5000`;
-
-const viteProcess = exec(viteCommand, (error, stdout, stderr) => {
-  if (error) {
-    console.error('Error starting Vite:', error);
-    return;
-  }
-  if (stderr) {
-    console.error('Vite stderr:', stderr);
-  }
-  console.log('Vite output:', stdout);
-});
-
-viteProcess.stdout?.on('data', (data) => {
-  console.log(data.toString());
-});
-
-viteProcess.stderr?.on('data', (data) => {
-  console.error(data.toString());
+// Start Vite directly from client directory for static website
+const viteProcess = spawn('npx', ['vite', '--host', '0.0.0.0', '--port', '5000'], {
+  cwd: 'client',
+  stdio: 'inherit'
 });
 
 console.log(`
 ╔════════════════════════════════════════════════════════════╗
 ║                                                            ║
-║   🚀 Seventy7 Kapital - Starting Vite Server              ║
+║   🚀 Seventy7 Kapital - Static Trading Platform           ║
 ║                                                            ║
-║   📊 Will be available at: http://localhost:5000           ║
-║   🌐 Loading your trading platform...                     ║
+║   📊 Starting at: http://localhost:5000                   ║
+║   🌐 Pure frontend, no backend required!                  ║
 ║                                                            ║
 ╚════════════════════════════════════════════════════════════╝
 `);
