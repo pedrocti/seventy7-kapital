@@ -25,7 +25,6 @@ function App() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    // Simulate loading for a better UX
     const timer = setTimeout(() => {
       setLoading(false);
     }, 1500);
