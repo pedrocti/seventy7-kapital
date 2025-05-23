@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Seventy7 Kapital | Premium Trading & Financial Empowerment</title>
+    <meta name="description" content="Access premium trading mentorship, funding support, and life-changing financial resources with Seventy7 Kapital." />
+    <meta name="keywords" content="trading, financial empowerment, mentorship, funding, cryptocurrency, forex" />
+    
+    <!-- Open Graph tags -->
+    <meta property="og:title" content="Seventy7 Kapital | Premium Trading & Financial Empowerment" />
+    <meta property="og:description" content="Access premium trading mentorship, funding support, and life-changing financial resources." />
+    <meta property="og:type" content="website" />
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="icon" href="/favicon.ico" />
+    
+    <style>
+      body {
+        margin: 0;
+        padding: 0;
+        background: #000;
+        color: #fff;
+        font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      }
+      .loading {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 100vh;
+        background: linear-gradient(135deg, #0a0f1e 0%, #1a1f2e 100%);
+      }
+      .loading-text {
+        font-size: 1.5rem;
+        color: #0aefff;
+        animation: pulse 2s infinite;
+      }
+      @keyframes pulse {
+        0%, 100% { opacity: 1; }
+        50% { opacity: 0.5; }
+      }
+    </style>
+  </head>
+  <body>
+    <div id="loading" class="loading">
+      <div class="loading-text">Loading Seventy7 Kapital...</div>
+    </div>
+    <div id="root" style="display: none;"></div>
+    
+    <!-- Static frontend without any backend dependencies -->
+    <script type="module">
+      // Simple loading simulation
+      setTimeout(() => {
+        document.getElementById('loading').style.display = 'none';
+        document.getElementById('root').style.display = 'block';
+        // Load the React app
+        import('./client/src/main.static.tsx');
+      }, 1500);
+    </script>
+  </body>
+</html>
