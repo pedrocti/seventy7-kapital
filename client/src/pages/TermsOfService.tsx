@@ -55,7 +55,7 @@ const TermsOfService = () => {
             <p>These terms and conditions are governed by and construed in accordance with the laws and you irrevocably submit to the exclusive jurisdiction of the courts in that location.</p>
             
             <h2 className="text-xl font-semibold text-white mt-8 mb-4">9. Contact Us</h2>
-            <p>If you have any questions about these Terms of Service, please contact us at support@seventy7kapital.com.</p>
+            <p>If you have any questions about these Terms of Service, please contact us at support@seventy7hub.com.</p>
           </div>
         </motion.div>
       </div>

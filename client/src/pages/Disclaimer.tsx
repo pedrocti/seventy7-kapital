@@ -43,7 +43,7 @@ const Disclaimer = () => {
             <p>Our website may contain links to external websites that are not provided or maintained by or in any way affiliated with Seventy7 Kapital. Please note that Seventy7 Kapital does not guarantee the accuracy, relevance, timeliness, or completeness of any information on these external websites.</p>
             
             <h2 className="text-xl font-semibold text-white mt-8 mb-4">Contact Us</h2>
-            <p>If you have any questions about this disclaimer, please contact us at support@seventy7kapital.com.</p>
+            <p>If you have any questions about this disclaimer, please contact us at support@seventy7hub.com.</p>
           </div>
         </motion.div>
       </div>
