@@ -35,24 +35,34 @@ const ParticleBackground = () => {
     
     container.appendChild(renderer.domElement);
     
-    // Create particles
+    // Create flying stars particles
     const particlesGeometry = new THREE.BufferGeometry();
-    const particlesCount = window.innerWidth < 768 ? 1000 : 2000;
+    const particlesCount = window.innerWidth < 768 ? 1500 : 3000;
     
     const posArray = new Float32Array(particlesCount * 3);
+    const velocityArray = new Float32Array(particlesCount * 3);
     
-    for (let i = 0; i < particlesCount * 3; i++) {
-      posArray[i] = (Math.random() - 0.5) * 10;
+    for (let i = 0; i < particlesCount * 3; i += 3) {
+      // Position
+      posArray[i] = (Math.random() - 0.5) * 20; // x
+      posArray[i + 1] = (Math.random() - 0.5) * 20; // y
+      posArray[i + 2] = (Math.random() - 0.5) * 20; // z
+      
+      // Velocity for falling effect
+      velocityArray[i] = (Math.random() - 0.5) * 0.02; // x velocity
+      velocityArray[i + 1] = -Math.random() * 0.03 - 0.01; // y velocity (falling)
+      velocityArray[i + 2] = (Math.random() - 0.5) * 0.02; // z velocity
     }
     
     particlesGeometry.setAttribute('position', new THREE.BufferAttribute(posArray, 3));
     
-    // Materials
+    // Enhanced materials for better visibility
     const particlesMaterial = new THREE.PointsMaterial({
-      size: 0.01,
-      color: 0x0AEFFF, // Teal color
+      size: 0.03,
+      color: 0x0AEFFF, // Bright teal color
       transparent: true,
-      opacity: 0.8
+      opacity: 0.9,
+      sizeAttenuation: true
     });
     
     // Mesh
@@ -85,17 +95,46 @@ const ParticleBackground = () => {
     const animate = () => {
       const elapsedTime = clock.getElapsedTime();
       
-      // Rotate particles continually regardless of mouse movement
-      particlesMesh.rotation.x = elapsedTime * 0.05;
-      particlesMesh.rotation.y = elapsedTime * 0.03;
+      // Get particles position array for falling animation
+      const positions = particlesGeometry.attributes.position.array as Float32Array;
       
-      // Add slight wave motion
-      particlesMesh.position.y = Math.sin(elapsedTime * 0.2) * 0.1;
+      // Animate falling particles
+      for (let i = 0; i < particlesCount * 3; i += 3) {
+        // Apply velocities
+        positions[i] += velocityArray[i]; // x movement
+        positions[i + 1] += velocityArray[i + 1]; // y movement (falling)
+        positions[i + 2] += velocityArray[i + 2]; // z movement
+        
+        // Reset particles that fall too far
+        if (positions[i + 1] < -10) {
+          positions[i] = (Math.random() - 0.5) * 20;
+          positions[i + 1] = 10;
+          positions[i + 2] = (Math.random() - 0.5) * 20;
+        }
+        
+        // Reset particles that drift too far horizontally
+        if (Math.abs(positions[i]) > 10) {
+          positions[i] = (Math.random() - 0.5) * 20;
+        }
+        if (Math.abs(positions[i + 2]) > 10) {
+          positions[i + 2] = (Math.random() - 0.5) * 20;
+        }
+      }
       
-      // Follow mouse with subtle movement if available
+      // Update geometry
+      particlesGeometry.attributes.position.needsUpdate = true;
+      
+      // Rotate entire particle system for flying effect
+      particlesMesh.rotation.x = elapsedTime * 0.02;
+      particlesMesh.rotation.y = elapsedTime * 0.01;
+      
+      // Add gentle floating motion
+      particlesMesh.position.y = Math.sin(elapsedTime * 0.1) * 0.2;
+      
+      // Mouse interaction for flying stars
       if (mouseX !== 0 || mouseY !== 0) {
-        particlesMesh.rotation.x += mouseY * 0.0003;
-        particlesMesh.rotation.y += mouseX * 0.0003;
+        particlesMesh.rotation.x += mouseY * 0.0002;
+        particlesMesh.rotation.y += mouseX * 0.0002;
       }
       
       // Render
