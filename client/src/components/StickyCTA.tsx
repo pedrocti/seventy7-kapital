@@ -1,6 +1,6 @@
 import { motion, AnimatePresence } from 'framer-motion';
 
-const StickyCTA = ({ visible }) => {
+const StickyCTA = ({ visible }: { visible: boolean }) => {
   return (
     <AnimatePresence>
       {visible && (
