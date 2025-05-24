@@ -25,7 +25,14 @@ const Home = () => {
   }, []);
 
   return (
-    <div className="relative min-h-screen font-inter text-white hide-scrollbar">
+    <div style={{ 
+      position: 'relative', 
+      minHeight: '100vh', 
+      fontFamily: 'Inter, sans-serif',
+      color: 'white',
+      backgroundColor: '#0F172A',
+      overflowX: 'hidden'
+    }}>
       <Helmet>
         <title>Seventy7 Kapital | Premium Trading & Financial Empowerment</title>
         <meta name="description" content="Access premium trading mentorship, funding support, and life-changing financial resources with Seventy7 Kapital." />
@@ -34,21 +41,23 @@ const Home = () => {
       
       <ParticleBackground />
       
-      <Navbar />
-      
-      <main>
-        <HeroSection />
-        <AboutSection />
-        <ServicesSection />
-        <TradingVisuals />
-        <MarketImpactVisual />
-        <BlogSection />
-        <CTASection />
-      </main>
-      
-      <Footer />
-      
-      <StickyCTA visible={showStickyCTA} />
+      <div style={{ position: 'relative', zIndex: 10 }}>
+        <Navbar />
+        
+        <main>
+          <HeroSection />
+          <AboutSection />
+          <ServicesSection />
+          <TradingVisuals />
+          <MarketImpactVisual />
+          <BlogSection />
+          <CTASection />
+        </main>
+        
+        <Footer />
+        
+        <StickyCTA visible={showStickyCTA} />
+      </div>
     </div>
   );
 };
