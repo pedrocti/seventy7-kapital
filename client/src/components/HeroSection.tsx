@@ -45,9 +45,9 @@ const HeroSection = () => {
           transition={{ duration: 0.8 }}
         >
           <h1 className="text-4xl md:text-6xl font-extrabold mb-6 leading-tight">
-            <span className="block mb-2">Master the Markets.</span>
+            <span className="block mb-2">Own Your Financial Journey.</span>
             <span className="bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-purple-500">
-              Build Generational Wealth.
+              Trade • Grow • Thrive
             </span>
           </h1>
           
