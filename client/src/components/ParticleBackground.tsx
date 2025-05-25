@@ -28,46 +28,70 @@ const ParticleBackground = () => {
     renderer.setSize(window.innerWidth, window.innerHeight);
     renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
     
-    // Clear existing canvas if any
-    while (container.firstChild) {
-      container.removeChild(container.firstChild);
+    if (container.children.length > 0) {
+      container.removeChild(container.children[0]);
     }
     
     container.appendChild(renderer.domElement);
     
-    // Create flying stars particles
-    const particlesGeometry = new THREE.BufferGeometry();
-    const particlesCount = window.innerWidth < 768 ? 1500 : 3000;
+    // Create candlestick particles
+    const candlesticksCount = window.innerWidth < 768 ? 80 : 150;
+    const candlesticks: THREE.Group[] = [];
+    const velocityArray = new Float32Array(candlesticksCount * 3);
     
-    const posArray = new Float32Array(particlesCount * 3);
-    const velocityArray = new Float32Array(particlesCount * 3);
-    
-    for (let i = 0; i < particlesCount * 3; i += 3) {
-      // Position
-      posArray[i] = (Math.random() - 0.5) * 20; // x
-      posArray[i + 1] = (Math.random() - 0.5) * 20; // y
-      posArray[i + 2] = (Math.random() - 0.5) * 20; // z
+    for (let i = 0; i < candlesticksCount; i++) {
+      const candlestickGroup = new THREE.Group();
       
-      // Velocity for falling effect
-      velocityArray[i] = (Math.random() - 0.5) * 0.02; // x velocity
-      velocityArray[i + 1] = -Math.random() * 0.03 - 0.01; // y velocity (falling)
-      velocityArray[i + 2] = (Math.random() - 0.5) * 0.02; // z velocity
+      // Random position
+      candlestickGroup.position.x = (Math.random() - 0.5) * 20;
+      candlestickGroup.position.y = (Math.random() - 0.5) * 20;
+      candlestickGroup.position.z = (Math.random() - 0.5) * 20;
+      
+      // Determine if bullish (green) or bearish (red)
+      const isBullish = Math.random() > 0.5;
+      const color = isBullish ? 0x00FF88 : 0xFF4444; // Green or Red
+      
+      // Create candlestick body (rectangle)
+      const bodyGeometry = new THREE.BoxGeometry(0.08, 0.15, 0.02);
+      const bodyMaterial = new THREE.MeshBasicMaterial({ 
+        color: color, 
+        transparent: true, 
+        opacity: 0.8 
+      });
+      const body = new THREE.Mesh(bodyGeometry, bodyMaterial);
+      
+      // Create candlestick wicks (thin lines)
+      const wickGeometry = new THREE.BoxGeometry(0.01, 0.25, 0.01);
+      const wickMaterial = new THREE.MeshBasicMaterial({ 
+        color: color, 
+        transparent: true, 
+        opacity: 0.9 
+      });
+      const topWick = new THREE.Mesh(wickGeometry, wickMaterial);
+      const bottomWick = new THREE.Mesh(wickGeometry, wickMaterial);
+      
+      // Position wicks
+      topWick.position.y = 0.12;
+      bottomWick.position.y = -0.12;
+      
+      // Add to group
+      candlestickGroup.add(body);
+      candlestickGroup.add(topWick);
+      candlestickGroup.add(bottomWick);
+      
+      // Set random rotation
+      candlestickGroup.rotation.x = Math.random() * Math.PI;
+      candlestickGroup.rotation.y = Math.random() * Math.PI;
+      candlestickGroup.rotation.z = Math.random() * Math.PI;
+      
+      // Store velocity
+      velocityArray[i * 3] = (Math.random() - 0.5) * 0.015; // x velocity
+      velocityArray[i * 3 + 1] = -Math.random() * 0.02 - 0.008; // y velocity (falling)
+      velocityArray[i * 3 + 2] = (Math.random() - 0.5) * 0.015; // z velocity
+      
+      candlesticks.push(candlestickGroup);
+      scene.add(candlestickGroup);
     }
-    
-    particlesGeometry.setAttribute('position', new THREE.BufferAttribute(posArray, 3));
-    
-    // Enhanced materials for better visibility
-    const particlesMaterial = new THREE.PointsMaterial({
-      size: 0.03,
-      color: 0x0AEFFF, // Bright teal color
-      transparent: true,
-      opacity: 0.9,
-      sizeAttenuation: true
-    });
-    
-    // Mesh
-    const particlesMesh = new THREE.Points(particlesGeometry, particlesMaterial);
-    scene.add(particlesMesh);
     
     // Mouse interaction
     let mouseX = 0;
@@ -80,7 +104,6 @@ const ParticleBackground = () => {
     
     window.addEventListener('mousemove', onMouseMove);
     
-    // Handle resize
     function handleResize() {
       camera.aspect = window.innerWidth / window.innerHeight;
       camera.updateProjectionMatrix();
@@ -95,46 +118,46 @@ const ParticleBackground = () => {
     const animate = () => {
       const elapsedTime = clock.getElapsedTime();
       
-      // Get particles position array for falling animation
-      const positions = particlesGeometry.attributes.position.array as Float32Array;
-      
-      // Animate falling particles
-      for (let i = 0; i < particlesCount * 3; i += 3) {
+      // Animate falling candlesticks
+      candlesticks.forEach((candlestick, index) => {
         // Apply velocities
-        positions[i] += velocityArray[i]; // x movement
-        positions[i + 1] += velocityArray[i + 1]; // y movement (falling)
-        positions[i + 2] += velocityArray[i + 2]; // z movement
+        candlestick.position.x += velocityArray[index * 3];
+        candlestick.position.y += velocityArray[index * 3 + 1];
+        candlestick.position.z += velocityArray[index * 3 + 2];
         
-        // Reset particles that fall too far
-        if (positions[i + 1] < -10) {
-          positions[i] = (Math.random() - 0.5) * 20;
-          positions[i + 1] = 10;
-          positions[i + 2] = (Math.random() - 0.5) * 20;
+        // Add rotation for flying effect
+        candlestick.rotation.x += 0.01;
+        candlestick.rotation.y += 0.008;
+        candlestick.rotation.z += 0.005;
+        
+        // Reset candlesticks that fall too far
+        if (candlestick.position.y < -10) {
+          candlestick.position.x = (Math.random() - 0.5) * 20;
+          candlestick.position.y = 10;
+          candlestick.position.z = (Math.random() - 0.5) * 20;
+          
+          // Reset rotation
+          candlestick.rotation.x = Math.random() * Math.PI;
+          candlestick.rotation.y = Math.random() * Math.PI;
+          candlestick.rotation.z = Math.random() * Math.PI;
         }
         
-        // Reset particles that drift too far horizontally
-        if (Math.abs(positions[i]) > 10) {
-          positions[i] = (Math.random() - 0.5) * 20;
+        // Reset candlesticks that drift too far horizontally
+        if (Math.abs(candlestick.position.x) > 10) {
+          candlestick.position.x = (Math.random() - 0.5) * 20;
         }
-        if (Math.abs(positions[i + 2]) > 10) {
-          positions[i + 2] = (Math.random() - 0.5) * 20;
+        if (Math.abs(candlestick.position.z) > 10) {
+          candlestick.position.z = (Math.random() - 0.5) * 20;
         }
-      }
+      });
       
-      // Update geometry
-      particlesGeometry.attributes.position.needsUpdate = true;
+      // Add gentle floating motion to entire scene
+      scene.position.y = Math.sin(elapsedTime * 0.1) * 0.1;
       
-      // Rotate entire particle system for flying effect
-      particlesMesh.rotation.x = elapsedTime * 0.02;
-      particlesMesh.rotation.y = elapsedTime * 0.01;
-      
-      // Add gentle floating motion
-      particlesMesh.position.y = Math.sin(elapsedTime * 0.1) * 0.2;
-      
-      // Mouse interaction for flying stars
+      // Mouse interaction effects
       if (mouseX !== 0 || mouseY !== 0) {
-        particlesMesh.rotation.x += mouseY * 0.0002;
-        particlesMesh.rotation.y += mouseX * 0.0002;
+        scene.rotation.x += mouseY * 0.0001;
+        scene.rotation.y += mouseX * 0.0001;
       }
       
       // Render
@@ -153,6 +176,21 @@ const ParticleBackground = () => {
       if (container && renderer.domElement) {
         container.removeChild(renderer.domElement);
       }
+      
+      // Clean up candlestick geometries
+      candlesticks.forEach(candlestick => {
+        candlestick.children.forEach(child => {
+          if (child instanceof THREE.Mesh) {
+            child.geometry.dispose();
+            if (child.material instanceof THREE.Material) {
+              child.material.dispose();
+            }
+          }
+        });
+      });
+      
+      renderer.dispose();
+      scene.clear();
     };
   }, []);
   
