@@ -34,10 +34,11 @@ const ParticleBackground = () => {
     
     container.appendChild(renderer.domElement);
     
-    // Create candlestick particles and dollar signs
-    const candlesticksCount = window.innerWidth < 768 ? 60 : 120;
-    const dollarSignsCount = window.innerWidth < 768 ? 30 : 50;
-    const totalCount = candlesticksCount + dollarSignsCount;
+    // Create candlestick particles, dollar signs, and dollar notes
+    const candlesticksCount = window.innerWidth < 768 ? 50 : 100;
+    const dollarSignsCount = window.innerWidth < 768 ? 25 : 40;
+    const dollarNotesCount = window.innerWidth < 768 ? 15 : 30;
+    const totalCount = candlesticksCount + dollarSignsCount + dollarNotesCount;
     const allObjects: THREE.Group[] = [];
     const velocityArray = new Float32Array(totalCount * 3);
     
@@ -104,9 +105,8 @@ const ParticleBackground = () => {
       dollarGroup.position.y = (Math.random() - 0.5) * 20;
       dollarGroup.position.z = (Math.random() - 0.5) * 20;
       
-      // Determine color (green for gains, red for losses)
-      const isGain = Math.random() > 0.5;
-      const color = isGain ? 0x00FF88 : 0xFF4444; // Green or Red
+      // White color for dollar signs to differentiate from candlesticks
+      const color = 0xFFFFFF; // White
       
       // Create a simple dollar sign shape using basic geometry
       // Create the S shape using two rings
@@ -155,6 +155,68 @@ const ParticleBackground = () => {
       
       allObjects.push(dollarGroup);
       scene.add(dollarGroup);
+    }
+    
+    // Create dollar note particles
+    for (let i = 0; i < dollarNotesCount; i++) {
+      const noteGroup = new THREE.Group();
+      
+      // Random position
+      noteGroup.position.x = (Math.random() - 0.5) * 20;
+      noteGroup.position.y = (Math.random() - 0.5) * 20;
+      noteGroup.position.z = (Math.random() - 0.5) * 20;
+      
+      // Create dollar note (rectangular bill)
+      const noteGeometry = new THREE.PlaneGeometry(0.2, 0.12);
+      const noteMaterial = new THREE.MeshBasicMaterial({ 
+        color: 0x00AA44, // Green dollar bill color
+        transparent: true, 
+        opacity: 0.8,
+        side: THREE.DoubleSide
+      });
+      const note = new THREE.Mesh(noteGeometry, noteMaterial);
+      
+      // Add border to the note
+      const borderGeometry = new THREE.EdgesGeometry(noteGeometry);
+      const borderMaterial = new THREE.LineBasicMaterial({ 
+        color: 0x006622, 
+        transparent: true, 
+        opacity: 0.9 
+      });
+      const border = new THREE.LineSegments(borderGeometry, borderMaterial);
+      
+      // Add small decorative elements (simple rectangles for detail)
+      const detailGeometry = new THREE.PlaneGeometry(0.05, 0.03);
+      const detailMaterial = new THREE.MeshBasicMaterial({ 
+        color: 0x004422, 
+        transparent: true, 
+        opacity: 0.7,
+        side: THREE.DoubleSide
+      });
+      const detail1 = new THREE.Mesh(detailGeometry, detailMaterial);
+      const detail2 = new THREE.Mesh(detailGeometry, detailMaterial);
+      
+      detail1.position.set(-0.05, 0.02, 0.001);
+      detail2.position.set(0.05, -0.02, 0.001);
+      
+      noteGroup.add(note);
+      noteGroup.add(border);
+      noteGroup.add(detail1);
+      noteGroup.add(detail2);
+      
+      // Set random rotation
+      noteGroup.rotation.x = Math.random() * Math.PI;
+      noteGroup.rotation.y = Math.random() * Math.PI;
+      noteGroup.rotation.z = Math.random() * Math.PI;
+      
+      // Store velocity for dollar notes (slower falling for realistic bill effect)
+      const noteIndex = candlesticksCount + dollarSignsCount + i;
+      velocityArray[noteIndex * 3] = (Math.random() - 0.5) * 0.01; // x velocity
+      velocityArray[noteIndex * 3 + 1] = -Math.random() * 0.015 - 0.005; // y velocity (slower falling)
+      velocityArray[noteIndex * 3 + 2] = (Math.random() - 0.5) * 0.01; // z velocity
+      
+      allObjects.push(noteGroup);
+      scene.add(noteGroup);
     }
     
     // Mouse interaction
