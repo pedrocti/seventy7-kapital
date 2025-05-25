@@ -35,9 +35,9 @@ const ParticleBackground = () => {
     container.appendChild(renderer.domElement);
     
     // Create candlestick particles, dollar signs, and dollar notes
-    const candlesticksCount = window.innerWidth < 768 ? 50 : 100;
-    const dollarSignsCount = window.innerWidth < 768 ? 25 : 40;
-    const dollarNotesCount = window.innerWidth < 768 ? 15 : 30;
+    const candlesticksCount = window.innerWidth < 768 ? 80 : 150;
+    const dollarSignsCount = window.innerWidth < 768 ? 40 : 70;
+    const dollarNotesCount = window.innerWidth < 768 ? 25 : 50;
     const totalCount = candlesticksCount + dollarSignsCount + dollarNotesCount;
     const allObjects: THREE.Group[] = [];
     const velocityArray = new Float32Array(totalCount * 3);
@@ -166,12 +166,12 @@ const ParticleBackground = () => {
       noteGroup.position.y = (Math.random() - 0.5) * 20;
       noteGroup.position.z = (Math.random() - 0.5) * 20;
       
-      // Create dollar note (rectangular bill)
+      // Create realistic dollar note (rectangular bill)
       const noteGeometry = new THREE.PlaneGeometry(0.2, 0.12);
       const noteMaterial = new THREE.MeshBasicMaterial({ 
-        color: 0x00AA44, // Green dollar bill color
+        color: 0xE8F5E8, // Light greenish-white (realistic dollar bill color)
         transparent: true, 
-        opacity: 0.8,
+        opacity: 0.85,
         side: THREE.DoubleSide
       });
       const note = new THREE.Mesh(noteGeometry, noteMaterial);
@@ -179,7 +179,7 @@ const ParticleBackground = () => {
       // Add border to the note
       const borderGeometry = new THREE.EdgesGeometry(noteGeometry);
       const borderMaterial = new THREE.LineBasicMaterial({ 
-        color: 0x006622, 
+        color: 0x2F5233, // Dark green border
         transparent: true, 
         opacity: 0.9 
       });
@@ -188,9 +188,9 @@ const ParticleBackground = () => {
       // Add small decorative elements (simple rectangles for detail)
       const detailGeometry = new THREE.PlaneGeometry(0.05, 0.03);
       const detailMaterial = new THREE.MeshBasicMaterial({ 
-        color: 0x004422, 
+        color: 0x1E4D72, // Blue-green details like real dollar bills
         transparent: true, 
-        opacity: 0.7,
+        opacity: 0.8,
         side: THREE.DoubleSide
       });
       const detail1 = new THREE.Mesh(detailGeometry, detailMaterial);
