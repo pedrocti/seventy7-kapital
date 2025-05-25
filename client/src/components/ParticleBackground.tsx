@@ -34,10 +34,12 @@ const ParticleBackground = () => {
     
     container.appendChild(renderer.domElement);
     
-    // Create candlestick particles
-    const candlesticksCount = window.innerWidth < 768 ? 80 : 150;
-    const candlesticks: THREE.Group[] = [];
-    const velocityArray = new Float32Array(candlesticksCount * 3);
+    // Create candlestick particles and dollar signs
+    const candlesticksCount = window.innerWidth < 768 ? 60 : 120;
+    const dollarSignsCount = window.innerWidth < 768 ? 30 : 50;
+    const totalCount = candlesticksCount + dollarSignsCount;
+    const allObjects: THREE.Group[] = [];
+    const velocityArray = new Float32Array(totalCount * 3);
     
     for (let i = 0; i < candlesticksCount; i++) {
       const candlestickGroup = new THREE.Group();
@@ -89,8 +91,70 @@ const ParticleBackground = () => {
       velocityArray[i * 3 + 1] = -Math.random() * 0.02 - 0.008; // y velocity (falling)
       velocityArray[i * 3 + 2] = (Math.random() - 0.5) * 0.015; // z velocity
       
-      candlesticks.push(candlestickGroup);
+      allObjects.push(candlestickGroup);
       scene.add(candlestickGroup);
+    }
+    
+    // Create dollar sign particles
+    for (let i = 0; i < dollarSignsCount; i++) {
+      const dollarGroup = new THREE.Group();
+      
+      // Random position
+      dollarGroup.position.x = (Math.random() - 0.5) * 20;
+      dollarGroup.position.y = (Math.random() - 0.5) * 20;
+      dollarGroup.position.z = (Math.random() - 0.5) * 20;
+      
+      // Determine color (green for gains, red for losses)
+      const isGain = Math.random() > 0.5;
+      const color = isGain ? 0x00FF88 : 0xFF4444; // Green or Red
+      
+      // Create a simple dollar sign shape using basic geometry
+      // Create the S shape using two rings
+      const topRingGeometry = new THREE.RingGeometry(0.04, 0.07, 8);
+      const bottomRingGeometry = new THREE.RingGeometry(0.04, 0.07, 8);
+      const dollarMaterial = new THREE.MeshBasicMaterial({ 
+        color: color, 
+        transparent: true, 
+        opacity: 0.85,
+        side: THREE.DoubleSide
+      });
+      
+      const topRing = new THREE.Mesh(topRingGeometry, dollarMaterial);
+      const bottomRing = new THREE.Mesh(bottomRingGeometry, dollarMaterial);
+      
+      // Position the rings to form an S shape
+      topRing.position.y = 0.05;
+      bottomRing.position.y = -0.05;
+      
+      // Add vertical lines through the center
+      const lineGeometry = new THREE.BoxGeometry(0.008, 0.18, 0.008);
+      const lineMaterial = new THREE.MeshBasicMaterial({ 
+        color: color, 
+        transparent: true, 
+        opacity: 0.9 
+      });
+      const line1 = new THREE.Mesh(lineGeometry, lineMaterial);
+      const line2 = new THREE.Mesh(lineGeometry, lineMaterial);
+      line2.position.x = 0.02;
+      
+      dollarGroup.add(topRing);
+      dollarGroup.add(bottomRing);
+      dollarGroup.add(line1);
+      dollarGroup.add(line2);
+      
+      // Set random rotation
+      dollarGroup.rotation.x = Math.random() * Math.PI;
+      dollarGroup.rotation.y = Math.random() * Math.PI;
+      dollarGroup.rotation.z = Math.random() * Math.PI;
+      
+      // Store velocity for dollar signs
+      const dollarIndex = candlesticksCount + i;
+      velocityArray[dollarIndex * 3] = (Math.random() - 0.5) * 0.02; // x velocity
+      velocityArray[dollarIndex * 3 + 1] = -Math.random() * 0.025 - 0.01; // y velocity (falling)
+      velocityArray[dollarIndex * 3 + 2] = (Math.random() - 0.5) * 0.02; // z velocity
+      
+      allObjects.push(dollarGroup);
+      scene.add(dollarGroup);
     }
     
     // Mouse interaction
@@ -118,36 +182,36 @@ const ParticleBackground = () => {
     const animate = () => {
       const elapsedTime = clock.getElapsedTime();
       
-      // Animate falling candlesticks
-      candlesticks.forEach((candlestick, index) => {
+      // Animate falling candlesticks and dollar signs
+      allObjects.forEach((object, index) => {
         // Apply velocities
-        candlestick.position.x += velocityArray[index * 3];
-        candlestick.position.y += velocityArray[index * 3 + 1];
-        candlestick.position.z += velocityArray[index * 3 + 2];
+        object.position.x += velocityArray[index * 3];
+        object.position.y += velocityArray[index * 3 + 1];
+        object.position.z += velocityArray[index * 3 + 2];
         
         // Add rotation for flying effect
-        candlestick.rotation.x += 0.01;
-        candlestick.rotation.y += 0.008;
-        candlestick.rotation.z += 0.005;
+        object.rotation.x += 0.01;
+        object.rotation.y += 0.008;
+        object.rotation.z += 0.005;
         
-        // Reset candlesticks that fall too far
-        if (candlestick.position.y < -10) {
-          candlestick.position.x = (Math.random() - 0.5) * 20;
-          candlestick.position.y = 10;
-          candlestick.position.z = (Math.random() - 0.5) * 20;
+        // Reset objects that fall too far
+        if (object.position.y < -10) {
+          object.position.x = (Math.random() - 0.5) * 20;
+          object.position.y = 10;
+          object.position.z = (Math.random() - 0.5) * 20;
           
           // Reset rotation
-          candlestick.rotation.x = Math.random() * Math.PI;
-          candlestick.rotation.y = Math.random() * Math.PI;
-          candlestick.rotation.z = Math.random() * Math.PI;
+          object.rotation.x = Math.random() * Math.PI;
+          object.rotation.y = Math.random() * Math.PI;
+          object.rotation.z = Math.random() * Math.PI;
         }
         
-        // Reset candlesticks that drift too far horizontally
-        if (Math.abs(candlestick.position.x) > 10) {
-          candlestick.position.x = (Math.random() - 0.5) * 20;
+        // Reset objects that drift too far horizontally
+        if (Math.abs(object.position.x) > 10) {
+          object.position.x = (Math.random() - 0.5) * 20;
         }
-        if (Math.abs(candlestick.position.z) > 10) {
-          candlestick.position.z = (Math.random() - 0.5) * 20;
+        if (Math.abs(object.position.z) > 10) {
+          object.position.z = (Math.random() - 0.5) * 20;
         }
       });
       
@@ -177,9 +241,9 @@ const ParticleBackground = () => {
         container.removeChild(renderer.domElement);
       }
       
-      // Clean up candlestick geometries
-      candlesticks.forEach(candlestick => {
-        candlestick.children.forEach(child => {
+      // Clean up all object geometries
+      allObjects.forEach(object => {
+        object.children.forEach(child => {
           if (child instanceof THREE.Mesh) {
             child.geometry.dispose();
             if (child.material instanceof THREE.Material) {
